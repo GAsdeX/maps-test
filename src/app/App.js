@@ -7,30 +7,44 @@ import { Button } from 'react-bootstrap';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-
+import AddMap from './components/AddMap'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-const numbers = [1,2,3,4,5,6,7,8,9];
+
+import { selectMap } from './actions/index'
 
 class App extends Component {
 
     createListItems() {
-        return this.props.maps.map((item) => {
+        console.log(this.props.MapStore);
+
+        return this.props.MapStore.map((item) => {
             return (
-                <Col xs={12} md={3} key={item}><MapCard data={item}></MapCard></Col>
+                <Col xs={12} md={6} key={item}><MapCard data={item}></MapCard></Col>
             )
         });
+    }
+
+    showAddMapModal() {
+        let modalMindow = document.querySelector('.modal-wrapper');
+
+        modalMindow.classList.add('active');
+    }
+
+    componentDidMount() {
+        selectMap();
     }
 
     render() {
         return (
             <div className="container">
                 {/*should place router here*/}
+                <AddMap></AddMap>
                 <Grid>
-
                     <header className="App-header">
                         <h1 className="App-title">Maps example</h1>
+                        <Button bsStyle="info" onClick={this.showAddMapModal}>Add new map</Button>
                     </header>
                     <div className="site-content">
                         <Row>
@@ -45,8 +59,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        maps: state.maps
+        MapStore: state.MapStore
     };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { selectMap })(App);

@@ -1,0 +1,33 @@
+.modal-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.7);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-wrapper .modal-content {
+    visibility: hidden;
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-wrapper.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-wrapper.active  .modal-content{
+    visibility: visible;
+    transform: none;
+    opacity: 1;
+}
+
+
+
